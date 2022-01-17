@@ -139,7 +139,7 @@ let _metrics =
  *
  */
 
-/* qqq : cover routine strMetricFormat | Dmytro : covered */
+/* qqq : cover routine strMetricFormat */ /* aaa : Dmytro : covered */
 /* xxx : use it for time measurement */
 
 function strMetricFormat( number, o )
@@ -324,6 +324,114 @@ function strTimeFormat( time )
   return result;
 }
 
+//
+
+function unitsConvert_functor( fo )
+{
+  _.assert( arguments.length === 1 );
+  _.routine.options( unitsConvert_functor, fo );
+  _.assert( fo.unitsBaseRatio.default in fo.unitsBaseRatio );
+  _.each( fo.unitsBaseRatio, ( e, k ) => _.assert( /[a-zA-Z]+$/.test( k ) ) );
+
+  if( fo.metrics === null )
+  fo.metrics = _metrics;
+
+  /* */
+
+  unitsConvert.defaults =
+  {
+    src : null,
+    dstType : 'default',
+  };
+
+  return function unitsConvert( o )
+  {
+    _.assert( arguments.length === 1 );
+    _.routine.options( unitsConvert_functor, o );
+    _.assert( o.dstType in fo.unitsBaseRatio );
+
+    if( _.str.is( o.src ) )
+    {
+      const splits = _.strIsolateLeftOrAll( o.src, /[a-zA-Z]*$/ );
+      if( splits[ 1 ] === undefined )
+      {
+        const multiplier = multiplierGet( o.dstType, fo.unitsBaseRatio.default );
+        return multiplier * _.number.from( o.src );
+      }
+
+      let multiplier = 1;
+      let type = splits[ 1 ];
+      if( !type in fo.unitsBaseRatio )
+      {
+        const prefix = type[ 0 ];
+        for( let key in fo.metrics )
+        if( fo.metrics[ key ] === prefix )
+        {
+          multiplier = Math.pow( 10, _.number.from( key ) );
+          type = type.substring( 1 );
+        }
+
+        if( multiplier === 1 )
+        if( prefix === 'd' && type[ 1 ] === 'a' && type.length > 2 )
+        {
+          multiplier = 10;
+          type = type.substring( 2 );
+        }
+      }
+
+      _.assert( multiplier !== 1 );
+
+      const typeMultiplier = multiplierGet( o.dstType, type );
+      return multiplier * typeMultiplier * _.number.from( splits[ 0 ] );
+    }
+    else if( _.number.is( o.src ) )
+    {
+      const multiplier = multiplierGet( o.dstType, fo.unitsBaseRatio.default );
+      return multiplier * o.src;
+    }
+    else
+    {
+      _.assert( false, 'Unexpected type of of {-o.src-}.' );
+    }
+  }
+
+  /* */
+
+  function multiplierGet( dstType, baseType )
+  {
+    if( dstType === baseType )
+    return 1;
+    return baseMultiplierGet( dstType ) / baseMultiplierGet( baseType );
+  }
+
+  /* */
+
+  function baseMultiplierGet( type )
+  {
+    let multiplier = 1;
+    const descriptors = _.map.extend( null, fo.unitsBaseRatio )
+    let valid = true;
+    while( valid === true )
+    {
+      const unit = fo.unitsBaseRatio[ type ];
+      _.assert( !_.bool.is( unit ), 'The map with units ratio has cycle.' );
+      multiplier *= unit.ratio;
+
+      if( unit.type === fo.unitsBaseRatio.default )
+      return multiplier;
+
+      type = unit.type;
+      _.assert( unit.type in fo.unitsBaseRatio );
+    }
+  }
+}
+
+unitsConvert_functor.defaults =
+{
+  unitsBaseRatio : null,
+  metrics : null,
+};
+
 // --
 // declare
 // --
@@ -338,6 +446,8 @@ let Extension =
   strMetricFormatBytes,
 
   strTimeFormat,
+
+  unitsConvert_functor,
 }
 
 _.props.extend( _.units, Extension );
