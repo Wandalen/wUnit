@@ -403,6 +403,176 @@ function strTimeFormat( test )
   test.shouldThrowErrorOfAnyKind( () => _.units.strTimeFormat( '24:00' ) );
 }
 
+//
+
+function unitsConvert( test )
+{
+  const unitsBaseRatio =
+  {
+    default : 'h',
+    h : 1,
+    d : 24,
+    m : 1 / 60,
+  };
+
+  let hoursConverter = _.units.unitsConvert_functor({ unitsBaseRatio });
+
+  /* */
+
+  test.case = 'one hour, number';
+  var got = hoursConverter({ src : 1 });
+  test.identical( got, 1 );
+
+  test.case = 'one hour, string';
+  var got = hoursConverter({ src : '1h' });
+  test.identical( got, 1 );
+
+  test.case = 'one day, string';
+  var got = hoursConverter({ src : '1d' });
+  test.identical( got, 24 );
+
+  test.case = 'one minute, string';
+  var got = hoursConverter({ src : '1m' });
+  test.identical( got, 1 / 60 );
+
+  /* */
+
+  test.case = 'two hours, number';
+  var got = hoursConverter({ src : 2 });
+  test.identical( got, 2 );
+
+  test.case = 'two hours, string';
+  var got = hoursConverter({ src : '2h' });
+  test.identical( got, 2 );
+
+  test.case = 'two days, string';
+  var got = hoursConverter({ src : '2d' });
+  test.identical( got, 48 );
+
+  test.case = 'two minutes, string';
+  var got = hoursConverter({ src : '2m' });
+  test.identical( got, 2 / 60 );
+
+  /* */
+
+  test.case = '1.5 hours, number';
+  var got = hoursConverter({ src : 1.5 });
+  test.identical( got, 1.5 );
+
+  test.case = 'two hours, string';
+  var got = hoursConverter({ src : '1.5h' });
+  test.identical( got, 1.5 );
+
+  test.case = '1.5 days, string';
+  var got = hoursConverter({ src : '1.5d' });
+  test.identical( got, 36 );
+
+  test.case = 'two minutes, string';
+  var got = hoursConverter({ src : '1.5m' });
+  test.identical( got, 1.5 / 60 );
+
+  /* */
+
+  test.case = 'one hour, string, metric - k';
+  var got = hoursConverter({ src : '2kh' });
+  test.identical( got, 2000 );
+
+  test.case = 'one day, string, metric - k';
+  var got = hoursConverter({ src : '2kd' });
+  test.identical( got, 48000 );
+
+  test.case = 'one minute, string, metric - k';
+  var got = hoursConverter({ src : '2km' });
+  test.identical( got, 100 / 3 );
+
+  /* */
+
+  test.case = 'one hour, string, metric - d';
+  var got = hoursConverter({ src : '2dh' });
+  test.identical( got, 0.2 );
+
+  test.case = 'one day, string, metric - d';
+  var got = hoursConverter({ src : '2dd' });
+  test.equivalent( got, 4.8 );
+
+  test.case = 'one minute, string, metric - d';
+  var got = hoursConverter({ src : '2dm' });
+  test.identical( got, 2 / 600 );
+
+  /* */
+
+  test.case = 'one hour, string, metric - da';
+  var got = hoursConverter({ src : '2dah' });
+  test.identical( got, 20 );
+
+  test.case = 'one day, string, metric - da';
+  var got = hoursConverter({ src : '2dad' });
+  test.equivalent( got, 480 );
+
+  test.case = 'one minute, string, metric - da';
+  var got = hoursConverter({ src : '2dam' });
+  test.identical( got, 2 / 6 );
+
+  /* */
+
+  test.case = 'two hours, number, dstType - m';
+  var got = hoursConverter({ src : 2, dstType : 'm' });
+  test.identical( got, 120 );
+
+  test.case = 'two hours, string, dstType - m';
+  var got = hoursConverter({ src : '2h', dstType : 'm' });
+  test.identical( got, 120 );
+
+  test.case = 'two days, string, dstType - m';
+  var got = hoursConverter({ src : '2d', dstType : 'm' });
+  test.identical( got, 48 * 60 );
+
+  test.case = 'two minutes, string, dstType - m';
+  var got = hoursConverter({ src : '2m', dstType : 'm' });
+  test.identical( got, 2 );
+
+  /* */
+
+  test.case = 'two hours, number, dstType - d';
+  var got = hoursConverter({ src : 2, dstType : 'd' });
+  test.identical( got, 1 / 12 );
+
+  test.case = 'two hours, string, dstType - d';
+  var got = hoursConverter({ src : '2h', dstType : 'd' });
+  test.identical( got, 1 / 12 );
+
+  test.case = 'two days, string, dstType - d';
+  var got = hoursConverter({ src : '2d', dstType : 'd' });
+  test.identical( got, 2 );
+
+  test.case = 'two minutes, string, dstType - d';
+  var got = hoursConverter({ src : '2m', dstType : 'd' });
+  test.identical( got, 1 / 12 / 60 );
+
+  /* - */
+
+  if( !Config.debug )
+  return;
+
+  test.case = 'without arguments';
+  test.shouldThrowErrorSync( () => hoursConverter() );
+
+  test.case = 'extra arguments';
+  test.shouldThrowErrorSync( () => hoursConverter( { src : 1 }, { src : 1 } ) );
+
+  test.case = 'wrong type of src';
+  test.shouldThrowErrorSync( () => hoursConverter( 1 ) );
+
+  test.case = 'wrong type of src';
+  test.shouldThrowErrorSync( () => hoursConverter({ src : [ 1 ] }) );
+
+  test.case = 'unknown option in options map';
+  test.shouldThrowErrorSync( () => hoursConverter({ src : 1, unknown : 1 }) );
+
+  test.case = 'wrong dstType';
+  test.shouldThrowErrorSync( () => hoursConverter({ src : 1, dstType : 1 }) );
+}
+
 // --
 // declare
 // --
@@ -418,6 +588,8 @@ const Proto =
     strMetricFormatBytes,
     strToBytes,
     strTimeFormat,
+
+    unitsConvert,
   },
 };
 

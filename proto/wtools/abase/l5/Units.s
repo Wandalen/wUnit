@@ -1,4 +1,4 @@
-( function _StringTools_s_()
+( function _Units_s_()
 {
 
 'use strict';
@@ -338,17 +338,14 @@ function unitsConvert_functor( fo )
 
   /* */
 
-  unitsConvert.defaults =
-  {
-    src : null,
-    dstType : 'default',
-  };
-
-  return function unitsConvert( o )
+  function unitsConvert( o )
   {
     _.assert( arguments.length === 1 );
-    _.routine.options( unitsConvert_functor, o );
+    _.routine.options( unitsConvert, o );
     _.assert( o.dstType in fo.unitsBaseRatio );
+
+    if( o.dstType === 'default' )
+    o.dstType = fo.unitsBaseRatio[ o.dstType ];
 
     if( _.str.is( o.src ) )
     {
@@ -361,25 +358,27 @@ function unitsConvert_functor( fo )
 
       let multiplier = 1;
       let type = splits[ 1 ];
-      if( !type in fo.unitsBaseRatio )
+      let prefix = '';
+      if( !( type in fo.unitsBaseRatio ) )
       {
-        const prefix = type[ 0 ];
+        prefix = type[ 0 ];
         for( let key in fo.metrics )
-        if( fo.metrics[ key ] === prefix )
+        if( fo.metrics[ key ].symbol === prefix )
         {
           multiplier = Math.pow( 10, _.number.from( key ) );
           type = type.substring( 1 );
-        }
-
-        if( multiplier === 1 )
-        if( prefix === 'd' && type[ 1 ] === 'a' && type.length > 2 )
-        {
-          multiplier = 10;
-          type = type.substring( 2 );
+          break;
         }
       }
 
-      _.assert( multiplier !== 1 );
+      if( multiplier === 0.1 )
+      if( prefix === 'd' && type[ 0 ] === 'a' && !( type in fo.unitsBaseRatio ) )
+      {
+        multiplier = 10;
+        type = type.substring( 1 );
+      }
+
+      _.assert( _.number.is( multiplier ) );
 
       const typeMultiplier = multiplierGet( o.dstType, type );
       return multiplier * typeMultiplier * _.number.from( splits[ 0 ] );
@@ -395,34 +394,25 @@ function unitsConvert_functor( fo )
     }
   }
 
+  unitsConvert.defaults =
+  {
+    src : null,
+    dstType : 'default',
+  };
+
+  return unitsConvert;
+
   /* */
 
   function multiplierGet( dstType, baseType )
   {
     if( dstType === baseType )
     return 1;
-    return baseMultiplierGet( dstType ) / baseMultiplierGet( baseType );
-  }
 
-  /* */
+    if( dstType === fo.unitsBaseRatio.default )
+    return fo.unitsBaseRatio[ dstType ] * fo.unitsBaseRatio[ baseType ];
 
-  function baseMultiplierGet( type )
-  {
-    let multiplier = 1;
-    const descriptors = _.map.extend( null, fo.unitsBaseRatio )
-    let valid = true;
-    while( valid === true )
-    {
-      const unit = fo.unitsBaseRatio[ type ];
-      _.assert( !_.bool.is( unit ), 'The map with units ratio has cycle.' );
-      multiplier *= unit.ratio;
-
-      if( unit.type === fo.unitsBaseRatio.default )
-      return multiplier;
-
-      type = unit.type;
-      _.assert( unit.type in fo.unitsBaseRatio );
-    }
+    return ( fo.unitsBaseRatio[ fo.unitsBaseRatio.default ] / fo.unitsBaseRatio[ dstType ] ) * fo.unitsBaseRatio[ baseType ];
   }
 }
 
