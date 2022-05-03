@@ -1,6 +1,6 @@
 {
   "name": "wunit",
-  "version": "0.3.345",
+  "version": "0.3.346",
   "description": "Collection of sophisticated routines for operations with different units.",
   "author": "Kostiantyn Wandalen <wandalen@obox.systems>",
   "contributors": [
