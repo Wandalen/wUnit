@@ -1,5 +1,5 @@
 about:
-  name: wUnits
+  name: wUnit
   description: Collection of sophisticated routines for operations with different units.
   version: 0.4.0
   enabled: 1
@@ -88,11 +88,11 @@ build:
       - 'build::release'
       - 'build::npm'
 path:
-  repository: 'git+https:///github.com/Wandalen/wUnits.git'
+  repository: 'git+https:///github.com/Wandalen/wUnit.git'
   origins:
-    - 'git+https:///github.com/Wandalen/wUnits.git'
+    - 'git+https:///github.com/Wandalen/wUnit.git'
     - 'npm:///wunit'
-  bugtracker: 'https:///github.com/Wandalen/wUnits/issues'
+  bugtracker: 'https:///github.com/Wandalen/wUnit/issues'
   in: .
   out: out
   temp:

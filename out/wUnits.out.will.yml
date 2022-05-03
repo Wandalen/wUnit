@@ -1,14 +1,14 @@
 format: outwillfile-2.0
 root:
-  - wUnits.out
+  - wUnit.out
 consistency:
   ../will.yml: &ref_0
     hash: 4a7f11bb5c3ae1e58ff41c8c325482c5
     size: 6276
 module:
-  wUnits.out:
+  wUnit.out:
     about:
-      name: wUnits
+      name: wUnit
       org: noorg
       description: >-
         Collection of sophisticated routines for operations with different
@@ -35,11 +35,11 @@ module:
       module.willfiles:
         criterion:
           predefined: 1
-        path: wUnits.out.will.yml
+        path: wUnit.out.will.yml
       module.common:
         criterion:
           predefined: 1
-        path: wUnits.out
+        path: wUnit.out
       module.original.willfiles:
         criterion:
           predefined: 1
@@ -57,13 +57,13 @@ module:
           predefined: 1
         path: ..
       repository:
-        path: 'git+https:///github.com/Wandalen/wUnits.git'
+        path: 'git+https:///github.com/Wandalen/wUnit.git'
       origins:
         path:
-          - 'git+https:///github.com/Wandalen/wUnits.git'
+          - 'git+https:///github.com/Wandalen/wUnit.git'
           - 'npm:///wunit'
       bugtracker:
-        path: 'https:///github.com/Wandalen/wUnits/issues'
+        path: 'https:///github.com/Wandalen/wUnit/issues'
       in:
         path: .
       out:
@@ -769,7 +769,7 @@ module:
       ../will.yml: *ref_0
   ../:
     about:
-      name: wUnits
+      name: wUnit
       org: noorg
       description: >-
         Collection of sophisticated routines for operations with different
@@ -795,7 +795,7 @@ module:
       module.peer.willfiles:
         criterion:
           predefined: 1
-        path: out/wUnits.out.will.yml
+        path: out/wUnit.out.will.yml
       module.peer.in:
         criterion:
           predefined: 1
@@ -809,13 +809,13 @@ module:
           predefined: 1
         path: .
       repository:
-        path: 'git+https:///github.com/Wandalen/wUnits.git'
+        path: 'git+https:///github.com/Wandalen/wUnit.git'
       origins:
         path:
-          - 'git+https:///github.com/Wandalen/wUnits.git'
+          - 'git+https:///github.com/Wandalen/wUnit.git'
           - 'npm:///wunit'
       bugtracker:
-        path: 'https:///github.com/Wandalen/wUnits/issues'
+        path: 'https:///github.com/Wandalen/wUnit/issues'
       in:
         path: .
       out:

@@ -1,5 +1,5 @@
 
-# module::Units [![status](https://github.com/Wandalen/wUnits/actions/workflows/StandardPublish.yml/badge.svg)](https://github.com/Wandalen/wUnits/actions/workflows/StandardPublish.yml) [![unstable](https://img.shields.io/badge/stability-unstable-yellow.svg)](https://github.com/emersion/stability-badges#unstable)
+# module::Units [![status](https://github.com/Wandalen/wUnit/actions/workflows/StandardPublish.yml/badge.svg)](https://github.com/Wandalen/wUnit/actions/workflows/StandardPublish.yml) [![unstable](https://img.shields.io/badge/stability-unstable-yellow.svg)](https://github.com/emersion/stability-badges#unstable)
 
 Collection of sophisticated routines for operations with different units.
 
@@ -7,8 +7,8 @@ Collection of sophisticated routines for operations with different units.
 ### Try out from the repository
 
 ```
-git clone https://github.com/Wandalen/wUnits
-cd wUnits
+git clone https://github.com/Wandalen/wUnit
+cd wUnit
 will .npm.install
 node sample/trivial/Sample.s
 ```

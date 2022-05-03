@@ -22,10 +22,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Wandalen/wUnits.git"
+    "url": "https://github.com/Wandalen/wUnit.git"
   },
   "bugs": {
-    "url": "https://github.com/Wandalen/wUnits/issues"
+    "url": "https://github.com/Wandalen/wUnit/issues"
   },
   "dependencies": {
     "wTools": ""
