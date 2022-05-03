@@ -3,8 +3,8 @@ root:
   - wUnits.out
 consistency:
   ../will.yml: &ref_0
-    hash: ab1f56112bcd0dd37cb9ef07eca060e9
-    size: 6279
+    hash: 4a7f11bb5c3ae1e58ff41c8c325482c5
+    size: 6276
 module:
   wUnits.out:
     about:
@@ -156,7 +156,7 @@ module:
           - ../proto/Integration.test.ss
           - ../proto/node_modules
           - ../proto/node_modules/Tools
-          - ../proto/node_modules/wunit
+          - ../proto/node_modules/wunits
           - ../proto/wtools
           - ../proto/wtools/abase
           - ../proto/wtools/abase/l5
@@ -1432,5 +1432,5 @@ module:
           - 'build::npm'
     consistency:
       ../will.yml:
-        hash: ab1f56112bcd0dd37cb9ef07eca060e9
-        size: 6279
+        hash: 4a7f11bb5c3ae1e58ff41c8c325482c5
+        size: 6276
