@@ -16,7 +16,7 @@ module:
       enabled: 1
       version: 0.4.0
       license: MIT
-      npm.name: wunits
+      npm.name: wunit
       author: Kostiantyn Wandalen <wandalen@obox.systems>
       keywords: &ref_1
         - wTools
@@ -61,7 +61,7 @@ module:
       origins:
         path:
           - 'git+https:///github.com/Wandalen/wUnits.git'
-          - 'npm:///wunits'
+          - 'npm:///wunit'
       bugtracker:
         path: 'https:///github.com/Wandalen/wUnits/issues'
       in:
@@ -139,7 +139,7 @@ module:
       npm.proto.entry:
         path:
           - ../proto/wtools/abase/l5/Units.s
-          - ../proto/node_modules/wunits
+          - ../proto/node_modules/wunit
       exported.dir.proto.export:
         criterion:
           generated: 1
@@ -156,7 +156,7 @@ module:
           - ../proto/Integration.test.ss
           - ../proto/node_modules
           - ../proto/node_modules/Tools
-          - ../proto/node_modules/wunits
+          - ../proto/node_modules/wunit
           - ../proto/wtools
           - ../proto/wtools/abase
           - ../proto/wtools/abase/l5
@@ -777,7 +777,7 @@ module:
       enabled: 1
       version: 0.4.0
       license: MIT
-      npm.name: wunits
+      npm.name: wunit
       author: Kostiantyn Wandalen <wandalen@obox.systems>
       keywords: *ref_1
       contributors: *ref_2
@@ -813,7 +813,7 @@ module:
       origins:
         path:
           - 'git+https:///github.com/Wandalen/wUnits.git'
-          - 'npm:///wunits'
+          - 'npm:///wunit'
       bugtracker:
         path: 'https:///github.com/Wandalen/wUnits/issues'
       in:
@@ -891,7 +891,7 @@ module:
       npm.proto.entry:
         path:
           - proto/wtools/abase/l5/Units.s
-          - proto/node_modules/wunits
+          - proto/node_modules/wunit
     submodule:
       wTools:
         path: 'npm:///wTools'

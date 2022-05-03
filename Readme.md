@@ -18,7 +18,7 @@ Make sure you have utility `willbe` installed. To install willbe: `npm i -g will
 ### To add to your project
 
 ```
-npm add 'wunits@stable'
+npm add 'wunit@stable'
 ```
 
 `Willbe` is not required to use the module in your project as submodule.
