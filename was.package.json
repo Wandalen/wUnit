@@ -1,5 +1,5 @@
 {
-  "name": "wunit",
+  "name": "wunits",
   "version": "0.3.346",
   "description": "Collection of sophisticated routines for operations with different units.",
   "author": "Kostiantyn Wandalen <wandalen@obox.systems>",
@@ -8,13 +8,13 @@
     "Dmytro Kryvoruchko <dm.vict.kr@gmail.com>"
   ],
   "license": "MIT",
-  "main": "proto/node_modules/wunit",
+  "main": "proto/node_modules/wunits",
   "files": [
     "out",
     "proto/wtools/abase/l5",
     "proto/node_modules",
     "proto/node_modules/Tools",
-    "proto/node_modules/wunit"
+    "proto/node_modules/wunits"
   ],
   "scripts": {
     "test": "wtest .run 'proto/**' rapidity:-3",
@@ -22,10 +22,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Wandalen/wUnit.git"
+    "url": "https://github.com/Wandalen/wUnits.git"
   },
   "bugs": {
-    "url": "https://github.com/Wandalen/wUnit/issues"
+    "url": "https://github.com/Wandalen/wUnits/issues"
   },
   "dependencies": {
     "wTools": ""

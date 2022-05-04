@@ -1,10 +1,10 @@
 about:
-  name: wUnit
+  name: wUnits
   description: Collection of sophisticated routines for operations with different units.
   version: 0.4.0
   enabled: 1
   license: MIT
-  npm.name: wunit
+  npm.name: wunits
   author: Kostiantyn Wandalen <wandalen@obox.systems>
   keywords:
     - wTools
@@ -88,11 +88,11 @@ build:
       - 'build::release'
       - 'build::npm'
 path:
-  repository: 'git+https:///github.com/Wandalen/wUnit.git'
+  repository: 'git+https:///github.com/Wandalen/wUnits.git'
   origins:
-    - 'git+https:///github.com/Wandalen/wUnit.git'
-    - 'npm:///wunit'
-  bugtracker: 'https:///github.com/Wandalen/wUnit/issues'
+    - 'git+https:///github.com/Wandalen/wUnits.git'
+    - 'npm:///wunits'
+  bugtracker: 'https:///github.com/Wandalen/wUnits/issues'
   in: .
   out: out
   temp:
@@ -153,7 +153,7 @@ path:
       content: prime
   npm.proto.entry:
     - proto/wtools/abase/l5/Units.s
-    - proto/node_modules/wunit
+    - proto/node_modules/wunits
 reflector:
   reflect.proto:
     inherit: predefined.*
