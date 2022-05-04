@@ -1,5 +1,5 @@
 
-let _ = require( 'wunits' );
+let _ = require( 'wunit' );
 
 const unit = _.units.strMetricFormatBytes( 1024 );
 console.log( unit );
