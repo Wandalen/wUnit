@@ -156,7 +156,7 @@ module:
           - ../proto/Integration.test.ss
           - ../proto/node_modules
           - ../proto/node_modules/Tools
-          - ../proto/node_modules/wunits
+          - ../proto/node_modules/wunit
           - ../proto/wtools
           - ../proto/wtools/abase
           - ../proto/wtools/abase/l5
